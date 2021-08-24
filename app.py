@@ -22,9 +22,11 @@ def save_to_library():
     """
     path_to_music = os.path.join(os.path.expanduser('~'), 'Music/iTunes/iTunes Media/Automatically Add to Music.localized/')
     cwd = os.listdir(os.getcwd())
-    if len(cwd) > 1: # ensures that the media download was successful
+    if len(cwd) > 4: # ensures that the media download was successful
         for file in cwd:
-            if file != 'app.py': shutil.move(os.path.abspath(file), os.path.join(path_to_music,file))
+            print(len(cwd))
+            if file not in ('app.py','LICENSE','README.md','.git'):
+                shutil.move(os.path.abspath(file), os.path.join(path_to_music,file))
     else:
         print('Download failed.')
 
@@ -33,8 +35,8 @@ def main():
     1) download the music/podcast
     2) send it to apple music so it is automatically on our phones
     """
-    url = sys.argv[1:] 
-    download_media(url) # step 1
+    # url = sys.argv[1:] 
+    # download_media(url) # step 1
     save_to_library() # step 2
 
 if __name__ == '__main__':
