@@ -4,7 +4,7 @@ import sys
 import shutil
 import youtube_dl
 
-def download_media(url):
+def download_media(urls):
     ydl_opts = {
         'format': 'bestaudio/best',
         'postprocessors': [{
@@ -14,7 +14,7 @@ def download_media(url):
         }],
     }
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-        ydl.download([url])
+        ydl.download(urls)
 
 def save_to_library():
     """
@@ -24,7 +24,6 @@ def save_to_library():
     cwd = os.listdir(os.getcwd())
     if len(cwd) > 4: # ensures that the media download was successful
         for file in cwd:
-            print(len(cwd))
             if file not in ('app.py','LICENSE','README.md','.git'):
                 shutil.move(os.path.abspath(file), os.path.join(path_to_music,file))
     else:
@@ -35,8 +34,8 @@ def main():
     1) download the music/podcast
     2) send it to apple music so it is automatically on our phones
     """
-    url = sys.argv[1:] 
-    download_media(url) # step 1
+    urls = sys.argv[1:] 
+    download_media(urls) # step 1
     save_to_library() # step 2
 
 if __name__ == '__main__':
