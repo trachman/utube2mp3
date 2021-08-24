@@ -35,8 +35,8 @@ def main():
     1) download the music/podcast
     2) send it to apple music so it is automatically on our phones
     """
-    # url = sys.argv[1:] 
-    # download_media(url) # step 1
+    url = sys.argv[1:] 
+    download_media(url) # step 1
     save_to_library() # step 2
 
 if __name__ == '__main__':
